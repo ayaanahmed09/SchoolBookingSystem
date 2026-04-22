@@ -1,11 +1,11 @@
-using ContosoUni.Models;
-using ContosoUni.Models.SchoolViewModels;
+using SchoolBookingSystem.Models;
+using SchoolBookingSystem.Models.SchoolViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using ContosoUni.Data;
+using SchoolBookingSystem.Data;
 
-namespace ContosoUni.Controllers
+namespace SchoolBookingSystem.Controllers
 {
     public class HomeController : Controller
     {

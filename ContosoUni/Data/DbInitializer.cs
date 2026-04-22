@@ -1,18 +1,18 @@
-﻿using ContosoUni.Data;
-using ContosoUni.Models;
-using ContosoUni.Models;
+﻿using SchoolBookingSystem.Data;
+using SchoolBookingSystem.Models;
+using SchoolBookingSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
-namespace ContosoUni.Data
+namespace SchoolBookingSystem.Data
 {
     public static class DbInitializer
     {
         public static void Initialize(SchoolContext context)
         {
-            //context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
 
             // Look for any students.
             if (context.Students.Any())

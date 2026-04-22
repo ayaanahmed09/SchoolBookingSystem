@@ -1,5 +1,5 @@
-﻿using ContosoUni.Models;
-using ContosoUni.Models.SchoolViewModels;
+﻿using SchoolBookingSystem.Models;
+using SchoolBookingSystem.Models.SchoolViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ContosoUni.Data;
+using SchoolBookingSystem.Data;
 
-namespace ContosoUni.Controllers
+namespace SchoolBookingSystem.Controllers
 {
     public class InstructorsController : Controller
     {

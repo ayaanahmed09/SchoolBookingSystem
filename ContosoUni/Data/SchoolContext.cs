@@ -1,12 +1,12 @@
-﻿using ContosoUni.Models;
-using ContosoUni.Models.SchoolViewModels;
+﻿using SchoolBookingSystem.Models;
+using SchoolBookingSystem.Models.SchoolViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ContosoUni.Data
+namespace SchoolBookingSystem.Data
 {
     public class SchoolContext : DbContext
     {

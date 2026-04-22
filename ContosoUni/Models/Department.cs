@@ -1,10 +1,10 @@
-﻿using ContosoUni.Models;
+﻿using SchoolBookingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ContosoUni.Models
+namespace SchoolBookingSystem.Models
 {
     public class Department
     {

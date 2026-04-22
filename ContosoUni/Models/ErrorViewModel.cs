@@ -1,4 +1,4 @@
-namespace ContosoUni.Models
+namespace SchoolBookingSystem.Models
 {
     public class ErrorViewModel
     {

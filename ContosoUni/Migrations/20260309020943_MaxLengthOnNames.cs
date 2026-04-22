@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ContosoUni.Migrations
+namespace SchoolBookingSystem.Migrations
 {
     /// <inheritdoc />
     public partial class MaxLengthOnNames : Migration

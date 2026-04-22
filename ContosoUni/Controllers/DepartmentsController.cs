@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ContosoUni.Data;
-using ContosoUni.Models;
+using SchoolBookingSystem.Data;
+using SchoolBookingSystem.Models;
 
-namespace ContosoUni.Controllers
+namespace SchoolBookingSystem.Controllers
 {
     public class DepartmentsController : Controller
     {

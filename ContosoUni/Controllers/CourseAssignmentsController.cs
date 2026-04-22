@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ContosoUni.Models;
-using ContosoUni.Data;
-namespace ContosoUni.Controllers
+using SchoolBookingSystem.Models;
+using SchoolBookingSystem.Data;
+namespace SchoolBookingSystem.Controllers
 
 {
     public class CourseAssignmentsController : Controller
