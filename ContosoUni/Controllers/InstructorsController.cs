@@ -29,7 +29,7 @@ namespace SchoolBookingSystem.Controllers
                   .Include(i => i.CourseAssignments)
                     .ThenInclude(i => i.Course)
                         .ThenInclude(i => i.Enrollments)
-                            .ThenInclude(i => i.Student)
+                            .ThenInclude(i => i.Booking)
                   .Include(i => i.CourseAssignments)
                     .ThenInclude(i => i.Course)
                         .ThenInclude(i => i.Department)

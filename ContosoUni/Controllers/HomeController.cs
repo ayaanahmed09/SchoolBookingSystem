@@ -19,7 +19,7 @@ namespace SchoolBookingSystem.Controllers
         public async Task<ActionResult> About()
         {
             IQueryable<EnrollmentDateGroup> data =
-                from student in _context.Students
+                from student in _context.Bookings
                 group student by student.EnrollmentDate into dateGroup
                 select new EnrollmentDateGroup()
                 {

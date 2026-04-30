@@ -1,6 +1,5 @@
 ﻿using SchoolBookingSystem.Data;
 using SchoolBookingSystem.Models;
-using SchoolBookingSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,35 +13,35 @@ namespace SchoolBookingSystem.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
-            if (context.Students.Any())
+            // Look for any bookings.
+            if (context.Bookings.Any())
             {
                 return;   // DB has been seeded
             }
 
-            var students = new Student[]
+            var bookings = new Booking[]
             {
-                new Student { FirstMidName = "Carson",   LastName = "Alexander",
+                new Booking { FirstMidName = "Carson",   LastName = "Alexander",
                     EnrollmentDate = DateTime.Parse("2010-09-01") },
-                new Student { FirstMidName = "Meredith", LastName = "Alonso",
+                new Booking { FirstMidName = "Meredith", LastName = "Alonso",
                     EnrollmentDate = DateTime.Parse("2012-09-01") },
-                new Student { FirstMidName = "Arturo",   LastName = "Anand",
+                new Booking { FirstMidName = "Arturo",   LastName = "Anand",
                     EnrollmentDate = DateTime.Parse("2013-09-01") },
-                new Student { FirstMidName = "Gytis",    LastName = "Barzdukas",
+                new Booking { FirstMidName = "Gytis",    LastName = "Barzdukas",
                     EnrollmentDate = DateTime.Parse("2012-09-01") },
-                new Student { FirstMidName = "Yan",      LastName = "Li",
+                new Booking { FirstMidName = "Yan",      LastName = "Li",
                     EnrollmentDate = DateTime.Parse("2012-09-01") },
-                new Student { FirstMidName = "Peggy",    LastName = "Justice",
+                new Booking { FirstMidName = "Peggy",    LastName = "Justice",
                     EnrollmentDate = DateTime.Parse("2011-09-01") },
-                new Student { FirstMidName = "Laura",    LastName = "Norman",
+                new Booking { FirstMidName = "Laura",    LastName = "Norman",
                     EnrollmentDate = DateTime.Parse("2013-09-01") },
-                new Student { FirstMidName = "Nino",     LastName = "Olivetto",
+                new Booking { FirstMidName = "Nino",     LastName = "Olivetto",
                     EnrollmentDate = DateTime.Parse("2005-09-01") }
             };
 
-            foreach (Student s in students)
+            foreach (Booking s in bookings)
             {
-                context.Students.Add(s);
+                context.Bookings.Add(s);
             }
             context.SaveChanges();
 
@@ -182,57 +181,57 @@ namespace SchoolBookingSystem.Data
 
             var enrollments = new Enrollment[]
             {
-                new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Alexander").ID,
+                    new Enrollment {
+                    Booking = bookings.Single(s => s.LastName == "Alexander").ID,
                     CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
                     Grade = Grade.A
-                },
+                    },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Alexander").ID,
+                    Booking = bookings.Single(s => s.LastName == "Alexander").ID,
                     CourseID = courses.Single(c => c.Title == "Microeconomics" ).CourseID,
                     Grade = Grade.C
                     },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Alexander").ID,
+                    Booking = bookings.Single(s => s.LastName == "Alexander").ID,
                     CourseID = courses.Single(c => c.Title == "Macroeconomics" ).CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                        StudentID = students.Single(s => s.LastName == "Alonso").ID,
+                    Booking = bookings.Single(s => s.LastName == "Alonso").ID,
                     CourseID = courses.Single(c => c.Title == "Calculus" ).CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                        StudentID = students.Single(s => s.LastName == "Alonso").ID,
+                    Booking = bookings.Single(s => s.LastName == "Alonso").ID,
                     CourseID = courses.Single(c => c.Title == "Trigonometry" ).CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Alonso").ID,
+                    Booking = bookings.Single(s => s.LastName == "Alonso").ID,
                     CourseID = courses.Single(c => c.Title == "Composition" ).CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Anand").ID,
+                    Booking = bookings.Single(s => s.LastName == "Anand").ID,
                     CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID
                     },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Anand").ID,
+                    Booking = bookings.Single(s => s.LastName == "Anand").ID,
                     CourseID = courses.Single(c => c.Title == "Microeconomics").CourseID,
                     Grade = Grade.B
                     },
-                new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Barzdukas").ID,
+                    new Enrollment {
+                    Booking = bookings.Single(s => s.LastName == "Barzdukas").ID,
                     CourseID = courses.Single(c => c.Title == "Chemistry").CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Li").ID,
+                    Booking = bookings.Single(s => s.LastName == "Li").ID,
                     CourseID = courses.Single(c => c.Title == "Composition").CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Justice").ID,
+                    Booking = bookings.Single(s => s.LastName == "Justice").ID,
                     CourseID = courses.Single(c => c.Title == "Literature").CourseID,
                     Grade = Grade.B
                     }
@@ -242,7 +241,7 @@ namespace SchoolBookingSystem.Data
             {
                 var enrollmentInDataBase = context.Enrollments.Where(
                     s =>
-                            s.Student.ID == e.StudentID &&
+                            s.Booking.ID == e.BookingID &&
                             s.Course.CourseID == e.CourseID).SingleOrDefault();
                 if (enrollmentInDataBase == null)
                 {

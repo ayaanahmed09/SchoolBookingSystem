@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ContosoUni.Data;
+using SchoolBookingSystem.Data;
 
 #nullable disable
 
-namespace ContosoUni.Migrations
+namespace SchoolBookingSystem.Migrations
 {
     [DbContext(typeof(SchoolContext))]
     [Migration("20260304215837_RelationshipUpdated")]

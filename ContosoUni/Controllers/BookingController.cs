@@ -10,16 +10,16 @@ using SchoolBookingSystem.Data;
 
 namespace SchoolBookingSystem.Controllers
 {
-    public class StudentsController : Controller
+    public class BookingController : Controller
     {
         private readonly SchoolContext _context;
 
-        public StudentsController(SchoolContext context)
+        public BookingController(SchoolContext context)
         {
             _context = context;
         }
 
-        // GET: Students
+        // GET: Bookings
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -41,50 +41,50 @@ namespace SchoolBookingSystem.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var students = from s in _context.Students
+            var bookings = from s in _context.Bookings
                            select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.LastName.Contains(searchString)
+                bookings = bookings.Where(s => s.LastName.Contains(searchString)
                                        || s.FirstMidName.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    students = students.OrderByDescending(s => s.LastName);
+                    bookings = bookings.OrderByDescending(s => s.LastName);
                     break;
                 case "Date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
+                    bookings = bookings.OrderBy(s => s.EnrollmentDate);
                     break;
                 case "date_desc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    bookings = bookings.OrderByDescending(s => s.EnrollmentDate);
                     break;
                 default:
-                    students = students.OrderBy(s => s.LastName);
+                    bookings = bookings.OrderBy(s => s.LastName);
                     break;
             }
             int pageSize = 3;
-            return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<Booking>.CreateAsync(bookings.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-        // GET: Students/Create
+        // GET: Bookings/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Bookings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EnrollmentDate,FirstMidName,LastName")] Student student)
+        public async Task<IActionResult> Create([Bind("EnrollmentDate,FirstMidName,LastName")] Booking booking)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(student);
+                    _context.Add(booking);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -96,10 +96,10 @@ namespace SchoolBookingSystem.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
-            return View(student);
+            return View(booking);
         }
 
-        // GET: Students/Edit/5
+        // GET: Bookings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,15 +107,15 @@ namespace SchoolBookingSystem.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students.FindAsync(id);
-            if (student == null)
+            var booking = await _context.Bookings.FindAsync(id);
+            if (booking == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(booking);
         }
 
-        // POST: Students/Edit/5
+        // POST: Bookings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
@@ -126,9 +126,9 @@ namespace SchoolBookingSystem.Controllers
             {
                 return NotFound();
             }
-            var studentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
-            if (await TryUpdateModelAsync<Student>(
-                studentToUpdate,
+            var bookingToUpdate = await _context.Bookings.FirstOrDefaultAsync(s => s.ID == id);
+            if (await TryUpdateModelAsync<Booking>(
+                bookingToUpdate,
                 "",
                 s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
             {
@@ -145,10 +145,10 @@ namespace SchoolBookingSystem.Controllers
                         "see your system administrator.");
                 }
             }
-            return View(studentToUpdate);
+            return View(bookingToUpdate);
         }
 
-        // GET: Students/Delete/5
+        // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -156,10 +156,10 @@ namespace SchoolBookingSystem.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
+            var booking = await _context.Bookings
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (student == null)
+            if (booking == null)
             {
                 return NotFound();
             }
@@ -171,23 +171,23 @@ namespace SchoolBookingSystem.Controllers
                     "see your system administrator.";
             }
 
-            return View(student);
+            return View(booking);
         }
 
-        // POST: Students/Delete/5
+        // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Students.FindAsync(id);
-            if (student == null)
+            var booking = await _context.Bookings.FindAsync(id);
+            if (booking == null)
             {
                 return RedirectToAction(nameof(Index));
             }
 
             try
             {
-                _context.Students.Remove(student);
+                _context.Bookings.Remove(booking);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -199,9 +199,9 @@ namespace SchoolBookingSystem.Controllers
 
         }
 
-        private bool StudentExists(int id)
+        private bool BookingExists(int id)
         {
-            return _context.Students.Any(e => e.ID == id);
+            return _context.Bookings.Any(e => e.ID == id);
         }
     }
 }

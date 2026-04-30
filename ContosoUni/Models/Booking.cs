@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolBookingSystem.Models
 {
-    public class Student
+    public class Booking
     {
         public int ID { get; set; }
         [Required]
