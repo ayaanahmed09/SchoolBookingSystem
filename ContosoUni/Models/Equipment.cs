@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolBookingSystem.Models
 {
-    public class Course
+    public class Equipment
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Number")]
-        public int CourseID { get; set; }
+        public int EquipmentID { get; set; }
 
         [StringLength(50, MinimumLength = 3)]
         public string Title { get; set; }

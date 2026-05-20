@@ -10,22 +10,22 @@ using SchoolBookingSystem.Data;
 
 namespace SchoolBookingSystem.Controllers
 {
-    public class CoursesController : Controller
+    public class EquipmentsController : Controller
     {
         private readonly SchoolContext _context;
 
-        public CoursesController(SchoolContext context)
+        public EquipmentsController(SchoolContext context)
         {
             _context = context;
         }
 
-        // GET: Courses
+        // GET: Equipments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Courses.ToListAsync());
+            return View(await _context.Equipments.ToListAsync());
         }
 
-        // GET: Courses/Details/5
+        // GET: Equipments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +33,42 @@ namespace SchoolBookingSystem.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var equipment = await _context.Equipments
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+                .FirstOrDefaultAsync(m => m.EquipmentID == id);
+            if (equipment == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(equipment);
         }
 
-        // GET: Courses/Create
+        // GET: Equipments/Create
         public IActionResult Create()
         {
             PopulateDepartmentsDropDownList();
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: Equipments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CourseID,Credits,DepartmentID,Title")] Course course)
+        public async Task<IActionResult> Create([Bind("EquipmentID,Credits,DepartmentID,Title")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
-            return View(course);
+            PopulateDepartmentsDropDownList(equipment.DepartmentID);
+            return View(equipment);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Equipments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,18 +76,18 @@ namespace SchoolBookingSystem.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var equipment = await _context.Equipments
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+                .FirstOrDefaultAsync(m => m.EquipmentID == id);
+            if (equipment == null)
             {
                 return NotFound();
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
-            return View(course);
+            PopulateDepartmentsDropDownList(equipment.DepartmentID);
+            return View(equipment);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Equipments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
@@ -99,10 +99,10 @@ namespace SchoolBookingSystem.Controllers
                 return NotFound();
             }
 
-            var courseToUpdate = await _context.Courses
-                .FirstOrDefaultAsync(c => c.CourseID == id);
+            var equipmentToUpdate = await _context.Equipments
+                .FirstOrDefaultAsync(c => c.EquipmentID == id);
 
-            if (await TryUpdateModelAsync<Course>(courseToUpdate,
+            if (await TryUpdateModelAsync<Equipment>(equipmentToUpdate,
                 "",
                 c => c.Credits, c => c.DepartmentID, c => c.Title))
             {
@@ -119,8 +119,8 @@ namespace SchoolBookingSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
-            return View(courseToUpdate);
+            PopulateDepartmentsDropDownList(equipmentToUpdate.DepartmentID);
+            return View(equipmentToUpdate);
         }
 
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
@@ -131,7 +131,7 @@ namespace SchoolBookingSystem.Controllers
             ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Equipments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,35 +139,35 @@ namespace SchoolBookingSystem.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var equipment = await _context.Equipments
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+                .FirstOrDefaultAsync(m => m.EquipmentID == id);
+            if (equipment == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(equipment);
         }
 
-        // POST: Courses/Delete/5
+        // POST: Equipments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course != null)
+            var equipment = await _context.Equipments.FindAsync(id);
+            if (equipment != null)
             {
-                _context.Courses.Remove(course);
+                _context.Equipments.Remove(equipment);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        private bool EquipmentExists(int id)
         {
-            return _context.Courses.Any(e => e.CourseID == id);
+            return _context.Equipments.Any(e => e.EquipmentID == id);
         }
     }
 }

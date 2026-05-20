@@ -22,7 +22,7 @@ namespace SchoolBookingSystem.Controllers
         // GET: Enrollments
         public async Task<IActionResult> Index()
         {
-            var schoolContext = _context.Enrollments.Include(e => e.Course).Include(e => e.Booking);
+            var schoolContext = _context.Enrollments.Include(e => e.Equipment).Include(e => e.Booking);
             return View(await schoolContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace SchoolBookingSystem.Controllers
             }
 
             var enrollment = await _context.Enrollments
-                .Include(e => e.Course)
+                .Include(e => e.Equipment)
                 .Include(e => e.Booking)
                 .FirstOrDefaultAsync(m => m.EnrollmentID == id);
             if (enrollment == null)
@@ -49,7 +49,7 @@ namespace SchoolBookingSystem.Controllers
         // GET: Enrollments/Create
         public IActionResult Create()
         {
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
+            ViewData["CourseID"] = new SelectList(_context.Equipments, "CourseID", "CourseID");
             ViewData["BookingID"] = new SelectList(_context.Bookings, "ID", "ID");
             return View();
         }
@@ -67,7 +67,7 @@ namespace SchoolBookingSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", enrollment.CourseID);
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID", enrollment.EquipmentID);
             ViewData["BookingID"] = new SelectList(_context.Bookings, "ID", "ID", enrollment.Booking);
             return View(enrollment);
         }
@@ -85,7 +85,7 @@ namespace SchoolBookingSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", enrollment.CourseID);
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID", enrollment.EquipmentID);
             ViewData["BookingID"] = new SelectList(_context.Bookings, "ID", "ID", enrollment.Booking);
             return View(enrollment);
         }
@@ -122,7 +122,7 @@ namespace SchoolBookingSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", enrollment.CourseID);
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID", enrollment.EquipmentID);
             ViewData["BookingID"] = new SelectList(_context.Bookings, "ID", "ID", enrollment.Booking);
             return View(enrollment);
         }
@@ -136,7 +136,7 @@ namespace SchoolBookingSystem.Controllers
             }
 
             var enrollment = await _context.Enrollments
-                .Include(e => e.Course)
+                .Include(e => e.Equipment)
                 .Include(e => e.Booking)
                 .FirstOrDefaultAsync(m => m.EnrollmentID == id);
             if (enrollment == null)

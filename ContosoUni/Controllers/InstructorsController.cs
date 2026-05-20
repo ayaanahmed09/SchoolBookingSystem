@@ -21,17 +21,17 @@ namespace SchoolBookingSystem.Controllers
         }
 
         // GET: Instructors
-        public async Task<IActionResult> Index(int? id, int? courseID)
+        public async Task<IActionResult> Index(int? id, int? equipmentID)
         {
             var viewModel = new InstructorIndexData();
             viewModel.Instructors = await _context.Instructors
                   .Include(i => i.OfficeAssignment)
                   .Include(i => i.CourseAssignments)
-                    .ThenInclude(i => i.Course)
+                    .ThenInclude(i => i.Equipment)
                         .ThenInclude(i => i.Enrollments)
                             .ThenInclude(i => i.Booking)
                   .Include(i => i.CourseAssignments)
-                    .ThenInclude(i => i.Course)
+                    .ThenInclude(i => i.Equipment)
                         .ThenInclude(i => i.Department)
                   .AsNoTracking()
                   .OrderBy(i => i.LastName)
@@ -42,14 +42,14 @@ namespace SchoolBookingSystem.Controllers
                 ViewData["InstructorID"] = id.Value;
                 Instructor instructor = viewModel.Instructors.Where(
                     i => i.ID == id.Value).Single();
-                viewModel.Courses = instructor.CourseAssignments.Select(s => s.Course);
+                viewModel.Equipments = instructor.CourseAssignments.Select(s => s.Equipment);
             }
 
-            if (courseID != null)
+            if (equipmentID != null)
             {
-                ViewData["CourseID"] = courseID.Value;
-                viewModel.Enrollments = viewModel.Courses.Where(
-                    x => x.CourseID == courseID).Single().Enrollments;
+                ViewData["EquipmentID"] = equipmentID.Value;
+                viewModel.Enrollments = viewModel.Equipments.Where(
+                    x => x.EquipmentID == equipmentID).Single().Enrollments;
             }
 
             return View(viewModel);
@@ -87,15 +87,15 @@ namespace SchoolBookingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstMidName,HireDate,LastName,OfficeAssignment")] Instructor instructor, string[] selectedCourses)
+        public async Task<IActionResult> Create([Bind("FirstMidName,HireDate,LastName,OfficeAssignment")] Instructor instructor, string[] selectedEquipments)
         {
-            if (selectedCourses != null)
+            if (selectedEquipments != null)
             {
                 instructor.CourseAssignments = new List<CourseAssignment>();
-                foreach (var course in selectedCourses)
+                foreach (var equipment in selectedEquipments)
                 {
-                    var courseToAdd = new CourseAssignment { InstructorID = instructor.ID, CourseID = int.Parse(course) };
-                    instructor.CourseAssignments.Add(courseToAdd);
+                    var courseToAdd = new CourseAssignment { InstructorID = instructor.ID, EquipmentID = int.Parse(equipment) };
+                    instructor.CourseAssignments.Add(equipmentToAdd);
                 }
             }
 

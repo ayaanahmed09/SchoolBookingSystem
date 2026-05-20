@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace SchoolBookingSystem.Models.SchoolViewModels
 {
-    public class AssignedCourseData
+    public class AssignedEquipmentData
     {
-        public int CourseID { get; set; }
+        public int EquipmentID { get; set; }
         public string Title { get; set; }
         public bool Assigned { get; set; }
     }

@@ -87,34 +87,34 @@ namespace SchoolBookingSystem.Data
             }
             context.SaveChanges();
 
-            var courses = new Course[]
+            var equipments = new Equipment[]
             {
-                new Course {CourseID = 1050, Title = "Chemistry",      Credits = 3,
+                new Equipment {EquipmentID = 1050, Title = "Chemistry",      Credits = 3,
                     DepartmentID = departments.Single( s => s.Name == "Engineering").DepartmentID
                 },
-                new Course {CourseID = 4022, Title = "Microeconomics", Credits = 3,
+                new Equipment {EquipmentID = 4022, Title = "Microeconomics", Credits = 3,
                     DepartmentID = departments.Single( s => s.Name == "Economics").DepartmentID
                 },
-                new Course {CourseID = 4041, Title = "Macroeconomics", Credits = 3,
+                new Equipment {EquipmentID = 4041, Title = "Macroeconomics", Credits = 3,
                     DepartmentID = departments.Single( s => s.Name == "Economics").DepartmentID
                 },
-                new Course {CourseID = 1045, Title = "Calculus",       Credits = 4,
+                new Equipment {EquipmentID = 1045, Title = "Calculus",       Credits = 4,
                     DepartmentID = departments.Single( s => s.Name == "Mathematics").DepartmentID
                 },
-                new Course {CourseID = 3141, Title = "Trigonometry",   Credits = 4,
+                new Equipment {EquipmentID = 3141, Title = "Trigonometry",   Credits = 4,
                     DepartmentID = departments.Single( s => s.Name == "Mathematics").DepartmentID
                 },
-                new Course {CourseID = 2021, Title = "Composition",    Credits = 3,
+                new Equipment {EquipmentID = 2021, Title = "Composition",    Credits = 3,
                     DepartmentID = departments.Single( s => s.Name == "English").DepartmentID
                 },
-                new Course {CourseID = 2042, Title = "Literature",     Credits = 4,
+                new Equipment {EquipmentID = 2042, Title = "Literature",     Credits = 4,
                     DepartmentID = departments.Single( s => s.Name == "English").DepartmentID
                 },
             };
 
-            foreach (Course c in courses)
+            foreach (Equipment c in equipments)
             {
-                context.Courses.Add(c);
+                context.Equipments.Add(c);
             }
             context.SaveChanges();
 
@@ -137,43 +137,43 @@ namespace SchoolBookingSystem.Data
             }
             context.SaveChanges();
 
-            var courseInstructors = new CourseAssignment[]
+            var equipmentInstructors = new CourseAssignment[]
             {
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Chemistry" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Kapoor").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Chemistry" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Harui").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Microeconomics" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Microeconomics" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Zheng").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Macroeconomics" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Macroeconomics" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Zheng").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Calculus" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Calculus" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Fakhouri").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Trigonometry" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Trigonometry" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Harui").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Composition" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Composition" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Abercrombie").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Literature" ).CourseID,
+                    EquipmentID = equipments.Single(c => c.Title == "Literature" ).EquipmentID,
                     InstructorID = instructors.Single(i => i.LastName == "Abercrombie").ID
                     },
             };
 
-            foreach (CourseAssignment ci in courseInstructors)
+            foreach (CourseAssignment ci in equipmentInstructors)
             {
                 context.CourseAssignments.Add(ci);
             }
@@ -182,57 +182,57 @@ namespace SchoolBookingSystem.Data
             var enrollments = new Enrollment[]
             {
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Alexander").ID,
-                    CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Alexander"),
+                    EquipmentID = equipments.Single(c => c.Title == "Chemistry" ).EquipmentID,
                     Grade = Grade.A
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Alexander").ID,
-                    CourseID = courses.Single(c => c.Title == "Microeconomics" ).CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Alexander"),
+                    EquipmentID = equipments.Single(c => c.Title == "Microeconomics" ).EquipmentID,
                     Grade = Grade.C
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Alexander").ID,
-                    CourseID = courses.Single(c => c.Title == "Macroeconomics" ).CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Alexander"),
+                    EquipmentID = equipments.Single(c => c.Title == "Macroeconomics" ).EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Alonso").ID,
-                    CourseID = courses.Single(c => c.Title == "Calculus" ).CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Alonso"),
+                    EquipmentID = equipments.Single(c => c.Title == "Calculus" ).EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Alonso").ID,
-                    CourseID = courses.Single(c => c.Title == "Trigonometry" ).CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Alonso"),
+                    EquipmentID = equipments.Single(c => c.Title == "Trigonometry" ).EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Alonso").ID,
-                    CourseID = courses.Single(c => c.Title == "Composition" ).CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Alonso"),
+                    EquipmentID = equipments.Single(c => c.Title == "Composition" ).EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Anand").ID,
-                    CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID
+                    Booking = bookings.Single(s => s.LastName == "Anand"),
+                    EquipmentID = equipments.Single(c => c.Title == "Chemistry" ).EquipmentID,
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Anand").ID,
-                    CourseID = courses.Single(c => c.Title == "Microeconomics").CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Anand"),
+                    EquipmentID = equipments.Single(c => c.Title == "Microeconomics").EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Barzdukas").ID,
-                    CourseID = courses.Single(c => c.Title == "Chemistry").CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Barzdukas"),
+                    EquipmentID = equipments.Single(c => c.Title == "Chemistry").EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Li").ID,
-                    CourseID = courses.Single(c => c.Title == "Composition").CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Li"),
+                    EquipmentID = equipments.Single(c => c.Title == "Composition").EquipmentID,
                     Grade = Grade.B
                     },
                     new Enrollment {
-                    Booking = bookings.Single(s => s.LastName == "Justice").ID,
-                    CourseID = courses.Single(c => c.Title == "Literature").CourseID,
+                    Booking = bookings.Single(s => s.LastName == "Justice"),
+                    EquipmentID = equipments.Single(c => c.Title == "Literature").EquipmentID,
                     Grade = Grade.B
                     }
             };
@@ -242,7 +242,7 @@ namespace SchoolBookingSystem.Data
                 var enrollmentInDataBase = context.Enrollments.Where(
                     s =>
                             s.Booking.ID == e.BookingID &&
-                            s.Course.CourseID == e.CourseID).SingleOrDefault();
+                            s.Equipment.EquipmentID == e.EquipmentID).SingleOrDefault();
                 if (enrollmentInDataBase == null)
                 {
                     context.Enrollments.Add(e);

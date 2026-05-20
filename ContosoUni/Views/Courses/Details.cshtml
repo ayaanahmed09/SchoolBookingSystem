@@ -1,4 +1,4 @@
-﻿@model SchoolBookingSystem.Models.Course
+﻿@model SchoolBookingSystem.Models.Equipment
 
 @{
     ViewData["Title"] = "Details";
@@ -11,10 +11,10 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CourseID)
+            @Html.DisplayNameFor(model => model.EquipmentID)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CourseID)
+            @Html.DisplayFor(model => model.EquipmentID)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.CourseID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.EquipmentID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

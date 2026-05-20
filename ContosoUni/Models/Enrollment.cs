@@ -11,12 +11,12 @@ namespace SchoolBookingSystem.Models
     public class Enrollment
     {
         public int EnrollmentID { get; set; }
-        public int CourseID { get; set; }
-        public int StudentID { get; set; }
+        public int EquipmentID { get; set; }
+        public int BookingID { get; set; }
         [DisplayFormat(NullDisplayText = "No grade")]
         public Grade? Grade { get; set; }
 
-        public Course Course { get; set; }
+        public Equipment Equipment { get; set; }
         public Booking Booking { get; set; }
     }
 }

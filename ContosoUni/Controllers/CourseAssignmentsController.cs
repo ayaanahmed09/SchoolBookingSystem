@@ -22,7 +22,7 @@ namespace SchoolBookingSystem.Controllers
         // GET: CourseAssignments
         public async Task<IActionResult> Index()
         {
-            var schoolContext = _context.CourseAssignments.Include(c => c.Course);
+            var schoolContext = _context.CourseAssignments.Include(c => c.Equipment);
             return View(await schoolContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace SchoolBookingSystem.Controllers
             }
 
             var courseAssignment = await _context.CourseAssignments
-                .Include(c => c.Course)
+                .Include(c => c.Equipment)
                 .FirstOrDefaultAsync(m => m.InstructorID == id);
             if (courseAssignment == null)
             {
@@ -48,7 +48,7 @@ namespace SchoolBookingSystem.Controllers
         // GET: CourseAssignments/Create
         public IActionResult Create()
         {
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID");
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SchoolBookingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InstructorID,CourseID")] CourseAssignment courseAssignment)
+        public async Task<IActionResult> Create([Bind("InstructorID,EquipmentID")] CourseAssignment courseAssignment)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace SchoolBookingSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", courseAssignment.CourseID);
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID", courseAssignment.EquipmentID);
             return View(courseAssignment);
         }
 
@@ -82,7 +82,7 @@ namespace SchoolBookingSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", courseAssignment.CourseID);
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID", courseAssignment.EquipmentID);
             return View(courseAssignment);
         }
 
@@ -91,7 +91,7 @@ namespace SchoolBookingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InstructorID,CourseID")] CourseAssignment courseAssignment)
+        public async Task<IActionResult> Edit(int id, [Bind("InstructorID,EquipmentID")] CourseAssignment courseAssignment)
         {
             if (id != courseAssignment.InstructorID)
             {
@@ -118,7 +118,7 @@ namespace SchoolBookingSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "CourseID", courseAssignment.CourseID);
+            ViewData["EquipmentID"] = new SelectList(_context.Equipments, "EquipmentID", "EquipmentID", courseAssignment.EquipmentID);
             return View(courseAssignment);
         }
 
@@ -131,7 +131,7 @@ namespace SchoolBookingSystem.Controllers
             }
 
             var courseAssignment = await _context.CourseAssignments
-                .Include(c => c.Course)
+                .Include(c => c.Equipment)
                 .FirstOrDefaultAsync(m => m.InstructorID == id);
             if (courseAssignment == null)
             {

@@ -1,4 +1,4 @@
-﻿@model SchoolBookingSystem.Models.Course
+﻿@model SchoolBookingSystem.Models.Equipment
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Course</h4>
+<h4>Equipment</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,9 +15,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="CourseID" class="control-label"></label>
-                <input asp-for="CourseID" class="form-control" />
-                <span asp-validation-for="CourseID" class="text-danger"></span>
+                <label asp-for="EquipmentID" class="control-label"></label>
+                <input asp-for="EquipmentID" class="form-control" />
+                <span asp-validation-for="EquipmentID" class="text-danger"></span>
             </div>
 
             <div class="form-group">
