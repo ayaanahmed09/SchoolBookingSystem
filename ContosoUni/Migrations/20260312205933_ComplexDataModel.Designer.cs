@@ -25,25 +25,17 @@ namespace SchoolBookingSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ContosoUni.Models.CourseAssignment", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.CourseAssignment", b =>
                 {
+                    b.Property<int>("EquipmentID")
+                        .HasColumnType("int");
+
                     b.Property<int>("InstructorID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstructorID"));
+                    b.HasKey("EquipmentID", "InstructorID");
 
-                    b.Property<int>("CourseID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InstructorID1")
-                        .HasColumnType("int");
-
-                    b.HasKey("InstructorID");
-
-                    b.HasIndex("CourseID");
-
-                    b.HasIndex("InstructorID1");
+                    b.HasIndex("InstructorID");
 
                     b.ToTable("CourseAssignment");
                 });

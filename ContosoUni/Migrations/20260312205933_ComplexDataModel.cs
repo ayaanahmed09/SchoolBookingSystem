@@ -46,23 +46,21 @@ namespace SchoolBookingSystem.Migrations
                 name: "CourseAssignment",
                 columns: table => new
                 {
+                    EquipmentID = table.Column<int>(type: "int", nullable: false),
                     InstructorID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseID = table.Column<int>(type: "int", nullable: false),
-                    InstructorID1 = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseAssignment", x => x.InstructorID);
+                    table.PrimaryKey("PK_CourseAssignment", x => new { x.EquipmentID, x.InstructorID });
                     table.ForeignKey(
-                        name: "FK_CourseAssignment_Course_CourseID",
-                        column: x => x.CourseID,
-                        principalTable: "Course",
-                        principalColumn: "CourseID",
+                        name: "FK_CourseAssignment_Equipment_EquipmentID",
+                        column: x => x.EquipmentID,
+                        principalTable: "Equipment",
+                        principalColumn: "EquipmentID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseAssignment_Instructor_InstructorID1",
-                        column: x => x.InstructorID1,
+                        name: "FK_CourseAssignment_Instructor_InstructorID",
+                        column: x => x.InstructorID,
                         principalTable: "Instructor",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -124,14 +122,9 @@ namespace SchoolBookingSystem.Migrations
                 column: "DepartmentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseAssignment_CourseID",
+                name: "IX_CourseAssignment_InstructorID",
                 table: "CourseAssignment",
-                column: "CourseID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CourseAssignment_InstructorID1",
-                table: "CourseAssignment",
-                column: "InstructorID1");
+                column: "InstructorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Department_InstructorID",

@@ -8,7 +8,6 @@ namespace SchoolBookingSystem.Models
 {
     public class CourseAssignment
     {
-        [Key]
         public int InstructorID { get; set; }
         public int EquipmentID { get; set; }
         public Instructor Instructor { get; set; }
