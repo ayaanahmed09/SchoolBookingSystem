@@ -34,14 +34,14 @@
         <dd class="col-sm-10">
             <table class="table">
                 <tr>
-                    <th>Course Title</th>
+                    <th>Equipment Title</th>
                     <th>Grade</th>
                 </tr>
                 @foreach (var item in Model.Enrollments)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Course.Title)
+                            @Html.DisplayFor(modelItem => item.Equipment.Title)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Grade)

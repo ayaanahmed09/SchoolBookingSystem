@@ -55,9 +55,9 @@
             <tr>
                 @{
                     int cnt = 0;
-                                List<SchoolBookingSystem.Models.SchoolViewModels.AssignedCourseData> courses = ViewBag.Courses;
+                                List<SchoolBookingSystem.Models.SchoolViewModels.AssignedEquipmentData> equipments = ViewBag.Equipments;
 
-                    foreach (var course in courses)
+                                foreach (var equipment in equipments)
                     {
                         if (cnt++ % 3 == 0)
                         {
@@ -66,9 +66,9 @@
                         @:<td>
                             <input type="checkbox"
                                    name="selectedCourses"
-                                   value="@course.CourseID"
-                                   @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) />
-                                   @course.CourseID @:  @course.Title
+                                                   value="@equipment.EquipmentID"
+                                            @(Html.Raw(equipment.Assigned ? "checked=\"checked\"" : "")) />
+                                            @equipment.EquipmentID @:  @equipment.Title
                         @:</td>
                     }
                     @:</tr>

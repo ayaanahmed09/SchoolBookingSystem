@@ -45,9 +45,10 @@
                     }
                 </td>
                 <td>
-                    @foreach (var course in item.CourseAssignments)
+                    @foreach (var equipment in item.CourseAssignments)
                     {
-                        @course.Course.CourseID @course.Course.Title <br />
+                        @equipment.Equipment.EquipmentID @equipment.Equipment.Title
+                        <br />
                     }
                 </td>
             <td>
@@ -62,7 +63,7 @@
 </table>
 
 
-@if (Model.Courses != null)
+@if (Model.Equipments != null)
 {
     <h3>Courses Taught by Selected Instructor</h3>
     <table class="table">
@@ -73,19 +74,19 @@
             <th>Department</th>
         </tr>
 
-        @foreach (var item in Model.Courses)
+        @foreach (var item in Model.Equipments)
         {
             string selectedRow = "";
-            if (item.CourseID == (int?)ViewData["CourseID"])
+            if (item.EquipmentID == (int?)ViewData["CourseID"])
             {
                 selectedRow = "table-success";
             }
             <tr class="@selectedRow">
                 <td>
-                    @Html.ActionLink("Select", "Index", new { courseID = item.CourseID })
+                    @Html.ActionLink("Select", "Index", new { courseID = item.EquipmentID })
                 </td>
                 <td>
-                    @item.CourseID
+                    @item.EquipmentID
                 </td>
                 <td>
                     @item.Title

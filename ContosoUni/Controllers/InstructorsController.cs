@@ -94,7 +94,7 @@ namespace SchoolBookingSystem.Controllers
                 instructor.CourseAssignments = new List<CourseAssignment>();
                 foreach (var equipment in selectedEquipments)
                 {
-                    var courseToAdd = new CourseAssignment { InstructorID = instructor.ID, EquipmentID = int.Parse(equipment) };
+                    var equipmentToAdd = new CourseAssignment { InstructorID = instructor.ID, EquipmentID = int.Parse(equipment) };
                     instructor.CourseAssignments.Add(equipmentToAdd);
                 }
             }
@@ -118,7 +118,7 @@ namespace SchoolBookingSystem.Controllers
             }
             var instructor = await _context.Instructors
         .Include(i => i.OfficeAssignment)
-        .Include(i => i.CourseAssignments).ThenInclude(i => i.Course)
+        .Include(i => i.CourseAssignments).ThenInclude(i => i.Equipment)
         .AsNoTracking()
         .FirstOrDefaultAsync(m => m.ID == id);
             if (instructor == null)
@@ -131,19 +131,19 @@ namespace SchoolBookingSystem.Controllers
 
         private void PopulateAssignedCourseData(Instructor instructor)
         {
-            var allCourses = _context.Courses;
-            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.CourseID));
-            var viewModel = new List<AssignedCourseData>();
-            foreach (var course in allCourses)
+            var allEquipments = _context.Equipments;
+            var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.EquipmentID));
+            var viewModel = new List<AssignedEquipmentData>();
+            foreach (var equipment in allEquipments)
             {
-                viewModel.Add(new AssignedCourseData
+                viewModel.Add(new AssignedEquipmentData
                 {
-                    CourseID = course.CourseID,
-                    Title = course.Title,
-                    Assigned = instructorCourses.Contains(course.CourseID)
+                    EquipmentID = equipment.EquipmentID,
+                    Title = equipment.Title,
+                    Assigned = instructorCourses.Contains(equipment.EquipmentID)
                 });
             }
-            ViewData["Courses"] = viewModel;
+            ViewData["Equipments"] = viewModel;
         }
 
         // POST: Instructors/Edit/5
@@ -151,7 +151,7 @@ namespace SchoolBookingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, string[] selectedCourses)
+        public async Task<IActionResult> Edit(int? id, string[] selectedEquipments)
         {
             if (id == null)
             {
@@ -161,7 +161,7 @@ namespace SchoolBookingSystem.Controllers
             var instructorToUpdate = await _context.Instructors
                 .Include(i => i.OfficeAssignment)
                 .Include(i => i.CourseAssignments)
-                     .ThenInclude(i => i.Course)
+                     .ThenInclude(i => i.Equipment)
                 .FirstOrDefaultAsync(s => s.ID == id);
 
             if (await TryUpdateModelAsync<Instructor>(
@@ -173,7 +173,7 @@ namespace SchoolBookingSystem.Controllers
                 {
                     instructorToUpdate.OfficeAssignment = null;
                 }
-                UpdateInstructorCourses(selectedCourses, instructorToUpdate);
+                UpdateInstructorCourses(selectedEquipments, instructorToUpdate);
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -187,38 +187,38 @@ namespace SchoolBookingSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            UpdateInstructorCourses(selectedCourses, instructorToUpdate);
+            UpdateInstructorCourses(selectedEquipments, instructorToUpdate);
             PopulateAssignedCourseData(instructorToUpdate);
             return View(instructorToUpdate);
         }
 
-        private void UpdateInstructorCourses(string[] selectedCourses, Instructor instructorToUpdate)
+        private void UpdateInstructorCourses(string[] selectedEquipments, Instructor instructorToUpdate)
         {
-            if (selectedCourses == null)
+            if (selectedEquipments == null)
             {
                 instructorToUpdate.CourseAssignments = new List<CourseAssignment>();
                 return;
             }
 
-            var selectedCoursesHS = new HashSet<string>(selectedCourses);
-            var instructorCourses = new HashSet<int>
-                (instructorToUpdate.CourseAssignments.Select(c => c.Course.CourseID));
-            foreach (var course in _context.Courses)
+            var selectedEquipmentsHS = new HashSet<string>(selectedEquipments);
+            var instructorEquipments = new HashSet<int>
+                (instructorToUpdate.CourseAssignments.Select(c => c.Equipment.EquipmentID));
+            foreach (var equipment in _context.Equipments)
             {
-                if (selectedCoursesHS.Contains(course.CourseID.ToString()))
+                if (selectedEquipmentsHS.Contains(equipment.EquipmentID.ToString()))
                 {
-                    if (!instructorCourses.Contains(course.CourseID))
+                    if (!instructorEquipments.Contains(equipment.EquipmentID))
                     {
-                        instructorToUpdate.CourseAssignments.Add(new CourseAssignment { InstructorID = instructorToUpdate.ID, CourseID = course.CourseID });
+                        instructorToUpdate.CourseAssignments.Add(new CourseAssignment { InstructorID = instructorToUpdate.ID, EquipmentID = equipment.EquipmentID });
                     }
                 }
                 else
                 {
 
-                    if (instructorCourses.Contains(course.CourseID))
+                    if (instructorEquipments.Contains(equipment.EquipmentID))
                     {
-                        CourseAssignment courseToRemove = instructorToUpdate.CourseAssignments.FirstOrDefault(i => i.CourseID == course.CourseID);
-                        _context.Remove(courseToRemove);
+                        CourseAssignment equipmentToRemove = instructorToUpdate.CourseAssignments.FirstOrDefault(i => i.EquipmentID == equipment.EquipmentID);
+                        _context.Remove(equipmentToRemove);
                     }
                 }
             }

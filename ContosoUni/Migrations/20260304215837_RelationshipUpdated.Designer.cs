@@ -25,7 +25,7 @@ namespace SchoolBookingSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.Course", b =>
                 {
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
@@ -42,7 +42,7 @@ namespace SchoolBookingSystem.Migrations
                     b.ToTable("Course");
                 });
 
-            modelBuilder.Entity("ContosoUniversity.Models.Enrollment", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.Enrollment", b =>
                 {
                     b.Property<int>("EnrollmentID")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace SchoolBookingSystem.Migrations
                     b.ToTable("Enrollment");
                 });
 
-            modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.Student", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -92,15 +92,15 @@ namespace SchoolBookingSystem.Migrations
                     b.ToTable("Student");
                 });
 
-            modelBuilder.Entity("ContosoUniversity.Models.Enrollment", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.Enrollment", b =>
                 {
-                    b.HasOne("ContosoUniversity.Models.Course", "Course")
+                    b.HasOne("SchoolBookingSystem.Models.Course", "Course")
                         .WithMany("Enrollments")
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ContosoUniversity.Models.Student", "Student")
+                    b.HasOne("SchoolBookingSystem.Models.Student", "Student")
                         .WithMany("Enrollments")
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -111,12 +111,12 @@ namespace SchoolBookingSystem.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.Course", b =>
                 {
                     b.Navigation("Enrollments");
                 });
 
-            modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
+            modelBuilder.Entity("SchoolBookingSystem.Models.Student", b =>
                 {
                     b.Navigation("Enrollments");
                 });
